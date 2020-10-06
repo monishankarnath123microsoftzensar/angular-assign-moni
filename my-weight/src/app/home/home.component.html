@@ -22,7 +22,7 @@
                         <td><a href="#" style="padding-right: 20px;"><i class="fa fa-trash text-dark"></i></a>
                             <a href="#" style="padding-right: 20px;"><span class="fa fa-info-circle text-dark"></span></a>
                             <!-- <button class="fa fa-info-circle"></button> -->
-                            {{entry.date|date}}</td>
+                            <a [routerLink]="['/home',entry.id]">{{entry.date|date}}</a></td>
                         <td>{{entry.weight}} lbs</td>
                         
                     </tr>

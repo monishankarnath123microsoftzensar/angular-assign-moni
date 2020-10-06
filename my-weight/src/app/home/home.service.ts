@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, throwError, } from 'rxjs';
+import { catchError,map,tap } from 'rxjs/operators';
 import { IEntry } from './entries';
 
 @Injectable({
@@ -6,47 +9,35 @@ import { IEntry } from './entries';
 })
 export class HomeService {
 
-  entries:IEntry[] = [
-    {
-      "id": 1,
-      "date": "1996-01-01T07:00:00.000Z",
-      "weight": 165,
-      "bodyfat": 0.2
-      },
-      {
-      "id": 2,
-      "date": "1996-01-02T07:00:00.000Z",
-      "weight": 164,
-      "bodyfat": 0.19 
-      },
-      {
-      "id": 3,
-      "date": "1996-01-03T07:00:00.000Z",
-      "weight": 164,
-      "bodyfat": 0.19
-      },
-      {
-      "id": 4,
-      "date": "1996-01-12T07:00:00.000Z",
-      "weight": 161,
-      "bodyfat": 0.18
-      },
-      {
-      "id": 5,
-      "date": "1995-12-31T07:00:00.000Z",
-      "weight": 167,
-      "bodyfat": 0.2
-      },
-      {
-      "id": 6,
-      "date": "1995-12-01T07:00:00.000Z",
-      "weight": 161,
-      "bodyfat": 0.18
-      }      
-  ]
-  constructor() { }
+  entries:IEntry[]
+  private entryUrl:string = 'assets/data/entries/entries.json'
+  constructor(private _httpClient:HttpClient) { }
 
-  getEntry():IEntry[]{
-    return this.entries;
+  // getEntry():IEntry[]{
+  //   return this.entries;
+  // }
+  getEntry():Observable<IEntry[]>{
+    
+    return this._httpClient.get<IEntry[]>(this.entryUrl).pipe(
+tap((data)=>console.log(`All Entry: ${JSON.stringify(data)}`)),
+catchError(this.handleError)
+    )
+  }
+  getEntryById(id:number):Observable<IEntry>{
+    return this.getEntry().pipe(
+      map((product:IEntry[])=>product.find(p=>p.id===id)),
+      catchError(this.handleError)
+    )
+  }
+  handleError(err){
+    let errorMsg=''
+    if(err.error instanceof Error){
+      errorMsg = `An error occured : ${err.error.message}`;
+    }
+    else{
+      errorMsg = `Server returned code: ${err.status} error message is : ${err.message}`
+    }
+    console.log(errorMsg)
+    return throwError
   }
 }
