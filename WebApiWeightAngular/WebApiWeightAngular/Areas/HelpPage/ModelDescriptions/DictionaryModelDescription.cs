@@ -1,0 +1,6 @@
+namespace WebApiWeightAngular.Areas.HelpPage.ModelDescriptions
+{
+    public class DictionaryModelDescription : KeyValuePairModelDescription
+    {
+    }
+}

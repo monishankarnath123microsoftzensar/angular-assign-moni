@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { IEntry } from './entries';
+import { Home } from './home';
 import { HomeService } from './home.service';
 
 @Component({
@@ -11,6 +13,7 @@ export class HomeComponent implements OnInit {
   pageTitle = "Your Weight Entries"
   constructor(private _homeService : HomeService) { }
 
+  home:Home = new Home();
   errorMessage:string
   entries:IEntry[]
   
@@ -21,6 +24,10 @@ export class HomeComponent implements OnInit {
       next:data=>this.entries=data,
       error:err=>this.errorMessage=<any>err
      })
+  }
+  saveData(custForm:NgForm):void{
+    console.log(custForm.form)
+    console.log(`Saved Cust Data: ${JSON.stringify(custForm.value)}`)
   }
 
 }

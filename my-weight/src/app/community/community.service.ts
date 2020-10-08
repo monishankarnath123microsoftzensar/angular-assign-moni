@@ -9,7 +9,7 @@ import { IComment } from './comment';
 })
 export class CommunityService {
   comment:IComment[]
-  private entryUrl:string = 'assets/data/entries/comments.json'
+  private entryUrl:string = 'https://localhost:44371/api/commentapi'
   constructor(private _httpClient:HttpClient) { }
   
   getEntry():Observable<IComment[]>{

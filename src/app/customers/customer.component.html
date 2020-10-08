@@ -1,0 +1,57 @@
+<div class="card">
+    <div class="card-header">
+        Customers Form:
+    </div>
+    <div class="card-body">
+    <form #custForm="ngForm" (ngSubmit)="saveCustomer(custForm)" novalidate>    
+        <div class="form-group row">        
+            <label class="col-md-1" for="firstNameId">First Name:</label>
+            <div class="col-md-5"> 
+                <input type="text" id="firstNameId" required placeholder="First Name(required)" minlength="3" name="firstName" #firstNameVar="ngModel" [(ngModel)]="customer.firstName" class="form-control"/>
+                <!-- <span *ngIf="(firstNameVar.touched || firstNameVar.dirty) && firstNameVar.invalid" class="text-danger">First name is mandatory!! Min length 3!!</span> -->
+                <span *ngIf="(firstNameVar.touched || firstNameVar.dirty) && firstNameVar.invalid" class="text-danger">
+                    <span *ngIf="firstNameVar.errors?.required">
+                        First Name Is Mandatory!!
+                    </span>
+                    <span *ngIf="firstNameVar.errors?.minlength">
+                        Min length 3!!
+                    </span>
+                </span>
+            </div>
+        </div>    
+        <div class="form-group row">        
+            <label class="col-md-1" for="lastNameId">Last Name:</label>        
+            <div class="col-md-5">
+                <input type="text" id="lastNameId" required placeholder="last Name(required)" name="lastName" #lastNameVar="ngModel" [(ngModel)]="customer.lastName" class="form-control"/>    
+                <span *ngIf="(lastNameVar.touched || lastNameVar.dirty) && lastNameVar.invalid" class="text-danger">Last name is mandatory!!</span>
+            </div>
+        </div>    
+        <div class="form-group row">        
+            <label class="col-md-1" for="emailId">Email:</label>        
+            <div class="col-md-5">
+                <input type="email" id="emailId" placeholder="abc@xyz.com" name="email" #emailVar="ngModel" [(ngModel)]="customer.email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required/>    
+                <!-- <span *ngIf="(emailVar.touched || emailVar.dirty) && emailVar.invalid" class="text-danger">Email is mandatory!!</span> -->
+                <span *ngIf="(emailVar.touched || emailVar.dirty) && emailVar.invalid" class="text-danger">
+                    <span *ngIf="emailVar.errors?.required">
+                        Email Is Mandatory!!
+                    </span>
+                    <span *ngIf="emailVar.errors?.pattern">
+                        Format Incorrect!!
+                    </span>
+                </span>
+            </div>
+        </div>    
+        <div>        
+            <input type="submit" class="btn btn-primary" value="Save" [title]="custForm.valid ? 'Save The Data' : 'Button is disabled when form invalid'" [disabled]="!custForm.valid" />    
+        </div>
+
+    </form>
+    
+    Value: {{custForm.value|json}}<br>
+    Touched: {{custForm.touched}}<br>
+    Dirty: {{custForm.dirty}}<br>
+    Valid for First name: {{firstNameVar.valid}}<br>
+</div>
+</div>
+
+<!-- pattern=".+@gmail.com"  -->

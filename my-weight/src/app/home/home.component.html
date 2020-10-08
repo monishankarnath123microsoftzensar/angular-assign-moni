@@ -31,14 +31,21 @@
             </table>
         </div>
     </div>
-
+<form #custForm="ngForm" (ngSubmit)="saveData(custForm)" novalidate>
     <div class="col-md-4" style="padding-top: 20px;">
         <div class="card-header">
             New Weight Entry
         </div>
         <div style="padding-top: 10px;">
-        <input type="text" placeholder="Weight">&nbsp;
-        <input type="text" placeholder="Date (mm/dd/yyyy)">&nbsp;
-        <input type="button" class="btn btn-sm btn-info" value="Save">
+        <input type="text" placeholder="Weight" name="Weight" #weightVar="ngModel" [(ngModel)]="home.weight" class="form-control" required>&nbsp;
+        <input type="date" placeholder="Date (mm/dd/yyyy)" name="Date" #dateVar="ngModel" [(ngModel)]="home.date" class="form-control">&nbsp;
+        <input type="submit" class="btn btn-sm btn-info" value="Save" [title]="custForm.valid ? 'Save The Data' : 'Button is disabled when form invalid'" [disabled]="!custForm.valid">
+        </div>
+        <div>
+            <span *ngIf="(weightVar.touched || weightVar.dirty) && weightVar.invalid" class="text-danger">Weight is mandatory & should be a NUMBER !!</span>
+            <span *ngIf="(dateVar.touched || dateVar.dirty) && dateVar.invalid" class="text-danger">Date is mandatory & should be a Date !!</span>
         </div>
     </div>
+    
+</form>
+Value: {{custForm.value|json}}
