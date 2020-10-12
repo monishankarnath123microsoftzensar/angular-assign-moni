@@ -4,6 +4,9 @@
                 <h1>{{pageTitle}}</h1>
             </div>
         </div>
+        <button class="btn btn-primary col-md-2" (click)="toggleFat()">
+            {{showFat?'Hide':'Show'}} Body Fat
+        </button>
         <div class="table-responsive">
             <div *ngIf="entries && entries.length==0"><p>Sorry No data available</p></div>
             <table class="table" *ngIf="entries && entries.length">
@@ -14,6 +17,7 @@
                                 Date
                         </th>
                         <th>Weight</th>
+                        <th *ngIf="showFat">Body Fat</th>
                         
                     </tr>
                 </thead>
@@ -24,6 +28,7 @@
                             <!-- <button class="fa fa-info-circle"></button> -->
                             <a [routerLink]="['/home',entry.id]">{{entry.date|date}}</a></td>
                         <td>{{entry.weight}} lbs</td>
+                        <td *ngIf="showFat">{{entry.bodyfat|percent}}</td>
                         
                     </tr>
                 </tbody>
@@ -31,21 +36,4 @@
             </table>
         </div>
     </div>
-<form #custForm="ngForm" (ngSubmit)="saveData(custForm)" novalidate>
-    <div class="col-md-4" style="padding-top: 20px;">
-        <div class="card-header">
-            New Weight Entry
-        </div>
-        <div style="padding-top: 10px;">
-        <input type="text" placeholder="Weight" name="Weight" #weightVar="ngModel" [(ngModel)]="home.weight" class="form-control" required>&nbsp;
-        <input type="date" placeholder="Date (mm/dd/yyyy)" name="Date" #dateVar="ngModel" [(ngModel)]="home.date" class="form-control">&nbsp;
-        <input type="submit" class="btn btn-sm btn-info" value="Save" [title]="custForm.valid ? 'Save The Data' : 'Button is disabled when form invalid'" [disabled]="!custForm.valid">
-        </div>
-        <div>
-            <span *ngIf="(weightVar.touched || weightVar.dirty) && weightVar.invalid" class="text-danger">Weight is mandatory & should be a NUMBER !!</span>
-            <span *ngIf="(dateVar.touched || dateVar.dirty) && dateVar.invalid" class="text-danger">Date is mandatory & should be a Date !!</span>
-        </div>
-    </div>
-    
-</form>
-Value: {{custForm.value|json}}
+<app-app-new-weight-entry [showbodyfat]="showFat"></app-app-new-weight-entry>

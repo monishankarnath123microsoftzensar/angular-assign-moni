@@ -30,3 +30,12 @@ catchError(this.handleError)
     return throwError
   }
 }
+
+// getProduct(id: number): Observable<IProduct> {
+//   const url = `${this.productUrl}/${id}`;
+//    return this._httpClient.get<IProduct>(url)
+//   .pipe(
+//     tap((data) =>console.log(`fetched Product id=${id}`)),
+//     catchError(this.handleError)
+//   );
+// }

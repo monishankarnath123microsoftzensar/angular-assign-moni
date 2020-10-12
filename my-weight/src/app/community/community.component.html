@@ -4,10 +4,5 @@
 <div *ngFor="let comment of comments">
     {{comment.commenter}}&nbsp;said:&nbsp;{{comment.comment}}
 </div>
-
-<div class="col-md-4" style="padding-top: 20px;">
-    <div style="padding-top: 10px;">
-    <input type="text" placeholder="New Comment">
-    </div>
-</div>
+<app-comment-form></app-comment-form>
 </div>

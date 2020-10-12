@@ -23,12 +23,23 @@ tap((data)=>console.log(`All Entry: ${JSON.stringify(data)}`)),
 catchError(this.handleError)
     )
   }
-  getEntryById(id:number):Observable<IEntry>{
-    return this.getEntry().pipe(
-      map((product:IEntry[])=>product.find(p=>p.id===id)),
+  // getEntryById(id:number):Observable<IEntry>{
+  //   return this.getEntry().pipe(
+  //     map((product:IEntry[])=>product.find(p=>p.id===id)),
+  //     catchError(this.handleError)
+  //   )
+  // }
+  getEntryById(id:number): Observable<IEntry> {
+    const url = `${this.entryUrl}/${id}`;
+     return this._httpClient.get<IEntry>(url)
+    .pipe(
+      tap((data) =>console.log(`fetched Entry by id=${id}`)),
       catchError(this.handleError)
-    )
+    );
   }
+  
+
+  
   handleError(err){
     let errorMsg=''
     if(err.error instanceof Error){

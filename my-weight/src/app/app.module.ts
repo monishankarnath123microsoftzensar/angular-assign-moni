@@ -7,7 +7,8 @@ import { AppComponent } from './app.component';
 import { CommunityComponent } from './community/community.component';
 import { HomeModule } from './home/home.module';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommentFormComponent } from './community/comment-form.component';
 
 // import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
@@ -15,14 +16,16 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
-    CommunityComponent
+    CommunityComponent,
+    CommentFormComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     HomeModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
     
   ],
   providers: [],

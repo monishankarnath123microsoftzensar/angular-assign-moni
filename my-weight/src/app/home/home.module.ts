@@ -5,6 +5,7 @@ import { DetailsComponent } from './details.component';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AppNewWeightEntryComponent } from './app-new-weight-entry.component';
 
 
 
@@ -12,7 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     HomeComponent,
-    DetailsComponent
+    DetailsComponent,
+    AppNewWeightEntryComponent
   ],
   imports: [
     CommonModule,

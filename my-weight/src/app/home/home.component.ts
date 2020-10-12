@@ -11,9 +11,10 @@ import { HomeService } from './home.service';
 })
 export class HomeComponent implements OnInit {
   pageTitle = "Your Weight Entries"
+  showFat:boolean = true
   constructor(private _homeService : HomeService) { }
 
-  home:Home = new Home();
+  
   errorMessage:string
   entries:IEntry[]
   
@@ -25,9 +26,9 @@ export class HomeComponent implements OnInit {
       error:err=>this.errorMessage=<any>err
      })
   }
-  saveData(custForm:NgForm):void{
-    console.log(custForm.form)
-    console.log(`Saved Cust Data: ${JSON.stringify(custForm.value)}`)
+  
+  toggleFat():void{
+    this.showFat = !this.showFat
   }
 
 }
