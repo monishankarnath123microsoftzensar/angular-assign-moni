@@ -1,0 +1,3 @@
+Providers are classes that create and manage service objects the first time that Angular needs to resolve a dependency.
+Providers is used to register the classes to an angular module as a service.
+And then, this service classes can be used by other components during the itself creation phase in the module.

@@ -1,0 +1,141 @@
+<div class="card">
+    <div class="card-header">
+   {{pageTitle}}
+    </div>
+  
+    <div class="card-body">
+      <form novalidate [formGroup]="productForm" class="form-horizontal" (ngSubmit)="save()">
+           
+          <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="productNameId">Product Name</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="productNameId"
+                   type="text"
+                   placeholder="Name (required)"
+                   formControlName="productName"/>
+                   <span *ngIf="(productForm.get('productName').touched || productForm.get('productName').dirty) && productForm.get('productName').invalid" class="text-danger">
+                    <span *ngIf="productForm.get('productName').errors?.required">
+                        it's mandatory !!
+                    </span>
+                    <span *ngIf="productForm.get('productName').errors?.maxLength">
+                        should be of length 15!!
+                    </span>
+                </span>
+          </div>
+        </div>
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="productCodeId">Product Code</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="productCodeId"
+                   type="text"
+                   placeholder="Code (required)"
+                   formControlName="productCode"/>
+                   <span *ngIf="(productForm.get('productCode').touched || productForm.get('productCode').dirty) && productForm.get('productCode').invalid" class="text-danger">
+                    <span *ngIf="productForm.get('productCode').errors?.required">
+                        it's mandatory !!
+                    </span>
+                  </span>
+          </div>
+        </div>
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="releaseDateId">Released Date</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="releaseDateId"
+                   type="text"
+                   placeholder="mm/dd/yyyy"
+                   formControlName="releaseDate"/>
+                   <span *ngIf="(productForm.get('releaseDate').touched || productForm.get('releaseDate').dirty) && productForm.get('releaseDate').invalid" class="text-danger">
+                    <span *ngIf="productForm.get('releaseDate').errors?.pattern">
+                        it's mandatory of date pattern !!
+                    </span>
+                  </span>
+          </div>
+        </div> 
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="priceId">Price</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="priceId"
+                   type="text"
+                   placeholder="1"
+                   formControlName="price"
+                   min="1"/>
+                   <span *ngIf="(productForm.get('price').touched || productForm.get('price').dirty) && productForm.get('price').invalid" class="text-danger">
+                    <span *ngIf="productForm.get('price').errors?.required">
+                        it's mandatory !!
+                    </span>
+                    <span *ngIf="productForm.get('price').errors?.minLength">
+                        should be of length 15!!
+                    </span>
+                </span>
+                  </div>
+        </div>
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="descriptionId">Description</label>
+  
+          <div class="col-md-8">
+            <textarea class="form-control"
+                      id="descriptionId"
+                      placeholder="Description"
+                      rows=3
+                      formControlName="description"></textarea>
+            
+          </div>
+        </div>
+  
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="productNameId">Star Rating</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="starRatingId"
+                   type="text"
+                   placeholder="range between 1-5 (required)"
+                   formControlName="starRating"/>
+                   <span *ngIf="(productForm.get('starRating').touched || productForm.get('starRating').dirty) && productForm.get('starRating').invalid" class="text-danger">
+           <span *ngIf="productForm.get('starRating').errors?.range">
+              range lies between 1 and 5 only
+           </span>
+          </span>
+          </div>
+        </div>
+        <div class="form-group row mb-2">
+          <div class="offset-md-2 col-md-4">
+            <button class="btn btn-primary mr-3"
+                    style="width:80px;"
+                    type="submit"
+                    [title]="productForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                    [disabled]="!productForm.valid">
+              Save
+            </button>
+            <button class="btn btn-outline-secondary mr-3"
+                    style="width:80px;"
+                    type="button"
+                    title="Cancel your edits"
+                    [routerLink]="['/products']">
+              Cancel
+            </button>
+            <button class="btn btn-outline-warning"
+                    style="width:80px"
+                    type="button"
+                    title="Delete this product"
+                    (click)="deleteProduct()">
+              Delete
+            </button>
+          </div>
+        </div> 
+      </form>
+    </div>
+  
+    <div class="alert alert-danger"
+         *ngIf="errorMessage">{{errorMessage}}
+    </div>
+  </div>

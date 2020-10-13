@@ -12,7 +12,7 @@ export class ProductDetailsComponent implements OnInit {
 
   pageTitle:string = 'Product Detail'
   product:IProduct
-  errorMsg:string
+  errorMessage:string
   constructor(private _productService : ProductService,
     private _activatedRoute: ActivatedRoute,
     private _router:Router) { }
@@ -22,7 +22,7 @@ export class ProductDetailsComponent implements OnInit {
 
     this._productService.getProductById(id).subscribe({
       next:data=>this.product=data,
-      error:err=>this.errorMsg=<any>err
+      error:err=>this.errorMessage=<any>err
      })
   }
   onBack():void{

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { CustReactiveComponent } from './customers/cust-reactive.component';
 import { CustomerComponent } from './customers/customer.component';
 import { HomeComponent } from './home/home.component';
 
@@ -12,6 +13,7 @@ import { HomeComponent } from './home/home.component';
       {path:'',redirectTo:'home',pathMatch:'full'},
       {path:'home', component:HomeComponent},
       {path:'customer', component:CustomerComponent},
+      {path:'customerReact', component:CustReactiveComponent},
       {path:'**',redirectTo:'home',pathMatch:'full'}
     ])
   ],

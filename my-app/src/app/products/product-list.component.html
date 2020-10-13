@@ -44,6 +44,9 @@
                         <td><app-star [rating]="product.starRating" (notify)="onRatingClicked($event)"></app-star></td>
                         <!-- <td>{{product.starRating}}</td> -->
                         <!-- <td>{{4444.2567|number}}</td> -->
+                        <td>
+                            <a class="btn btn-primary" [routerLink]="['/products',product.productId,'edit']">Edit</a>
+                        </td>
                     </tr>
                 </tbody>
                     
@@ -51,3 +54,5 @@
         </div>
     </div>
 </div>
+
+<a class="btn btn-info" [routerLink]="['/products',0,'edit']">Add</a>

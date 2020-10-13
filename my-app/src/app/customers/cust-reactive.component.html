@@ -1,0 +1,71 @@
+<div class="card">
+    <div class="card-header">
+        Customers Reactive Form:
+    </div>
+    <div class="card-body">
+        
+    <form (ngSubmit)="saveCustForm()" [formGroup]="custRForm" novalidate>  
+        <div class="container">  
+        <div class="form-group row">        
+            <label class="col-md-1" for="firstNameId">First Name:</label>
+            <div class="col-md-5"> 
+                <input type="text" id="firstNameId" placeholder="First Name(required)" formControlName="firstName" class="form-control"/>
+                <!-- <span *ngIf="(firstNameVar.touched || firstNameVar.dirty) && firstNameVar.invalid" class="text-danger">First name is mandatory!! Min length 3!!</span> -->
+                <span *ngIf="(custRForm.get('firstName').touched || custRForm.get('firstName').dirty) && custRForm.get('firstName').invalid" class="text-danger">
+                    <span *ngIf="custRForm.get('firstName').errors?.required">
+                        First Name Is Mandatory!!
+                    </span>
+                    <span *ngIf="custRForm.get('firstName').errors?.minlength">
+                        Min length 3!!
+                    </span>
+                </span>
+            </div>
+        </div>    
+        <div class="form-group row">        
+            <label class="col-md-1" for="lastNameId">Last Name:</label>        
+            <div class="col-md-5">
+                <input type="text" id="lastNameId" placeholder="last Name(required)" formControlName="lastName" class="form-control"/>    
+                <span *ngIf="(custRForm.get('lastName').touched || custRForm.get('lastName').dirty) && custRForm.get('lastName').invalid" class="text-danger">Last name is mandatory!!</span>
+            </div>
+        </div>    
+        <div class="form-group row">        
+            <label class="col-md-1" for="emailId">Email:</label>        
+            <div class="col-md-5">
+                <input type="email" id="emailId" placeholder="abc@xyz.com" formControlName="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"/>    
+                <!-- <span *ngIf="(emailVar.touched || emailVar.dirty) && emailVar.invalid" class="text-danger">Email is mandatory!!</span> -->
+                <!-- <span *ngIf="(emailVar.touched || emailVar.dirty) && emailVar.invalid" class="text-danger">
+                    <span *ngIf="emailVar.errors?.required">
+                        Email Is Mandatory!!
+                    </span>
+                    <span *ngIf="emailVar.errors?.pattern">
+                        Format Incorrect!!
+                    </span>
+                </span> -->
+            </div>
+        </div> 
+        <div class="form-group row">        
+            <label class="col-md-1" for="phoneId">Phone Num:</label>        
+            <div class="col-md-5">
+                <input type="text" id="phoneId" placeholder="Phone" formControlName="phone" class="form-control"/>    
+                <!-- <span *ngIf="(custRForm.get('lastName').touched || custRForm.get('lastName').dirty) && custRForm.get('lastName').invalid" class="text-danger">Last name is mandatory!!</span> -->
+            </div>
+        </div>   
+    </div>
+        <div>        
+            <input type="submit" class="btn btn-primary" value="Save" [title]="custRForm.valid ? 'Save The Data' : 'Button is disabled when form invalid'" [disabled]="!custRForm.valid" />    
+        </div>
+        <div>        
+            <input type="button" class="btn btn-info" value="Set Data" (click)="showSetData()"/>    
+        </div>
+        <div>        
+            <input type="button" class="btn btn-info" value="Patch Data" (click)="showPatchData()"/>    
+        </div>
+
+    </form>
+    
+    Value: {{custRForm.value|json}}<br>
+    Touched: {{custRForm.touched}}<br>
+    Dirty: {{custRForm.dirty}}<br>
+    <!-- Valid for First name: {{firstNameVar.valid}}<br> -->
+</div>
+</div>

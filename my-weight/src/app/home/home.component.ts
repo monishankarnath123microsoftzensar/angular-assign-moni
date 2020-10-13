@@ -31,4 +31,7 @@ export class HomeComponent implements OnInit {
     this.showFat = !this.showFat
   }
 
+  createNew(obj:object):void{
+    console.log(obj.valueOf())
+  }
 }

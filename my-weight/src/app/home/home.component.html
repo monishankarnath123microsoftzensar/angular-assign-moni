@@ -36,4 +36,4 @@
             </table>
         </div>
     </div>
-<app-app-new-weight-entry [showbodyfat]="showFat"></app-app-new-weight-entry>
+<app-app-new-weight-entry [showbodyfat]="showFat" (emitter)="createNew($event)"></app-app-new-weight-entry>

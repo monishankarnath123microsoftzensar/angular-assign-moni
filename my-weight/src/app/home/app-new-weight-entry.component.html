@@ -1,4 +1,4 @@
-<form #custForm="ngForm" (ngSubmit)="saveData(custForm)" novalidate>
+<!-- <form #custForm="ngForm" (ngSubmit)="saveData(custForm)" novalidate>
     <div class="col-md-4" style="padding-top: 20px;">
         <div class="card-header">
             New Weight Entry
@@ -25,16 +25,69 @@
                 <span *ngIf="dateVar.errors?.pattern">
                     should be a Date !!!!
                 </span>
-            </span>
-            <span *ngIf="(bodyfatVar.touched || bodyfatVar.dirty) && bodyfatVar.invalid" class="text-danger">
+            </span> -->
+            <!-- <span *ngIf="(bodyfatVar.touched || bodyfatVar.dirty) && bodyfatVar.invalid" class="text-danger">
                 <span *ngIf="bodyfatVar.errors?.required">
                     BodyFat is mandatory!!
                 </span>
                 <span *ngIf="bodyfatVar.errors?.pattern">
                     should be a number !!!!
                 </span>
-            </span>
-        </div>
+            </span> -->
+        <!-- </div>
     </div>
     <div class="container">Value: {{custForm.value|json}}</div>
-</form>
+</form> -->
+
+<div style="margin-top: 10px; float: left;" class="container col-6 ">
+    <div class=" card">    
+        <div class=" card-header"><h4>New weight entries</h4></div>
+        <div class="container">
+            <form novalidate class=" form-inline card-body row"
+            (ngSubmit)="saveWeightForm()" 
+            [formGroup]= "weightForm">
+                
+                <input type="text" id="weightId" formControlName="weight"        
+                placeholder="Weight(required)"                 
+                class="form-control"              
+                />&nbsp; &nbsp;
+                <input class="form-control" *ngIf="showbodyfat" type="text" formControlName="bodyfat" placeholder="Body Fat %"/>&nbsp;&nbsp;
+                <input style="margin-top: 10px;" formControlName="date" class="form-control" type="text" placeholder="Date(dd/mm/yyyy)"/>&nbsp;&nbsp;     
+                <div>
+                    <span *ngIf="(weightForm.get('weight').touched || weightForm.get('weight').dirty) && weightForm.get('weight').invalid" class="text-danger">
+                        <span *ngIf="weightForm.get('weight').errors?.required">
+                            it's mandatory !!
+                        </span>
+                        <span *ngIf="weightForm.get('weight').errors?.pattern">
+                            should be a number!!
+                        </span>
+                    </span>
+                    <span *ngIf="(weightForm.get('date').touched || weightForm.get('date').dirty) && weightForm.get('date').invalid" class="text-danger">
+                        <span *ngIf="weightForm.get('date').errors?.required">
+                            Date is mandatory!!
+                        </span>
+                        <span *ngIf="weightForm.get('date').errors?.pattern">
+                            should be a Date !!!!
+                        </span>
+                    </span>
+                    <span *ngIf="(weightForm.get('bodyfat').touched || weightForm.get('bodyfat').dirty) && weightForm.get('bodyfat').invalid" class="text-danger">
+                        <span *ngIf="weightForm.get('bodyfat').errors?.required">
+                            BodyFat is mandatory!!
+                        </span>
+                        <span *ngIf="weightForm.get('bodyfat').errors?.pattern">
+                            should be a number !!!!
+                        </span>
+                    </span>
+                </div>
+             <input type="submit" 
+                class="btn btn-primary btn-sm col-1"
+                style="margin-left:5px;"
+                value="Save"
+                [title]="weightForm.valid ? 'Save the data':
+                'Button is disabled when form is invalid'"
+                [disabled]="!weightForm.valid"/>
+            </form>
+        </div>
+    </div>      
+</div>  
+<br> Value : {{weightForm.value| json}}
